@@ -7,14 +7,15 @@ from skimage.io import imread
 import matplotlib.pyplot as plt
 
 
-ff = pd.read_csv(r"C:\Users\user\Documents\ProjectInDataScience2026_Exercises\data\metadata_with_group.csv")
+ff = pd.read_csv(r"/Users/juliak/Desktop/ProjectInDataScience2026_ExamTemplate1/metadata-merged(in).csv")
 df = ff[ (ff["group_id"]== "G") | (ff["group_id"]=="K") | (ff["group_id"]=="E") ].copy()
 cancerous_diagnostics = ['BCC', 'MEL', 'SCC'] 
 df['cancer'] = df['diagnostic'].isin(cancerous_diagnostics).astype(int) #1 if the diagnostic is in the list, and 0 otherwise
 df.head(5)
 
 
-df["path"] = "E:\projects\ProjectInDataScience2026_ExamTemplate1\data\imgs\\" + df["img_id"] 
+df["path"] = "/Users/juliak/Desktop/ProjectInDataScience2026_ExamTemplate1/data/imgs/" + df["img_id"] 
+
 
 X = df["path"].values
 y = df["cancer"].values
@@ -43,3 +44,13 @@ plt.title("Test image")
 plt.axis("off")
 plt.show()
 
+
+
+
+if __name__ == "__main__":
+    # This code only runs if you run THIS file directly.
+    # this will be ignored when you import it into the  asymmetry code.
+    img = imread(df["path"].iloc[0])
+    plt.imshow(img)
+    plt.title("Test image")
+    plt.show()

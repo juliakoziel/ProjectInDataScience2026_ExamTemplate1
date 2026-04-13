@@ -6,6 +6,8 @@ from skimage import morphology
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+from split_data_in_3sets import X_test, X_train
+
 
 def preprocess_img(path, size=(224, 224)):
     
