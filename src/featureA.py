@@ -2,7 +2,7 @@ import numpy as np
 import os
 import pandas as pd
 from skimage.io import imread
-# Import training data specifically
+
 from split_data_in_3sets import X_train, y_train 
 
 def asymmetry(mask):
