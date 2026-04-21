@@ -36,7 +36,7 @@ def asymmetry(mask):
     return round(float(score), 4)
 
 # getting masks
-mask_dir = "/Users/juliak/Desktop/ProjectInDataScience2026_ExamTemplate1/data/masks/"
+mask_dir = "data/masks/"
 train_results = []
 
 print(f"Starting calculation for {len(X_train)} training samples...")
@@ -73,6 +73,3 @@ train_df = pd.DataFrame(train_results)
 print("\n--- Training Set Asymmetry Complete ---")
 #to see it worked
 print(train_df.head(10))
-
-# Save to CSV so you don't have to run it again
-# train_df.to_csv("train_asymmetry_features.csv", index=False)
