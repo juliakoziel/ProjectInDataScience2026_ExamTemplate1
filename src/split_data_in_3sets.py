@@ -1,4 +1,4 @@
-#will load dataset and split into train, validation, test
+## will load dataset and split into train, validation, test
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -9,12 +9,12 @@ import matplotlib.pyplot as plt
 
 ff = pd.read_csv(r"metadata-merged(in).csv")
 df = ff[ (ff["group_id"]== "G") | (ff["group_id"]=="K") | (ff["group_id"]=="E") ].copy()
-cancerous_diagnostics = ['BCC', 'MEL', 'SCC'] 
-df['cancer'] = df['diagnostic'].isin(cancerous_diagnostics).astype(int) #1 if the diagnostic is in the list, and 0 otherwise
+cancerous_diagnostics = ['BCC', 'MEL', 'SCC']
+df['cancer'] = df['diagnostic'].isin(cancerous_diagnostics).astype(int)
 df.head(5)
 
 
-df["path"] = "/Users/juliak/Desktop/ProjectInDataScience2026_ExamTemplate1/data/imgs/" + df["img_id"] 
+df["path"] = "/Users/juliak/Desktop/ProjectInDataScience2026_ExamTemplate1/data/imgs/" + df["img_id"]
 
 
 X = df["path"].values
@@ -35,8 +35,7 @@ X_val, X_test, y_val, y_test = train_test_split(
 )
 
 
-#now to see if it worked###############
-#load one img
+# now to see if it worked
 img = imread(df["path"].iloc[0])
 
 plt.imshow(img)
@@ -45,11 +44,7 @@ plt.axis("off")
 plt.show()
 
 
-
-
 if __name__ == "__main__":
-    # This code only runs if you run THIS file directly.
-    # this will be ignored when you import it into the  asymmetry code.
     img = imread(df["path"].iloc[0])
     plt.imshow(img)
     plt.title("Test image")
