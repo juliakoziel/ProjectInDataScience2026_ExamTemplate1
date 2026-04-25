@@ -4,7 +4,7 @@ import pandas as pd
 from skimage.io import imread
 from skimage import measure
 # Import training data specifically
-from split_data_in_3sets import X_train, y_train, X_val, y_val
+from split_data_in_3sets import X_train, y_train, X_val, y_val, X_test, y_test
 from clean_the_imgs import preprocess_img
 from sklearn.preprocessing import StandardScaler
 
@@ -191,7 +191,7 @@ for i in range(len(X_val)):
         "is_cancer": label
     })
 
-print("almost there")
+#print("almost there")
 
 validation_df = pd.DataFrame(validation_results)
 print("\n--- Training Set Asymmetry Complete ---")
@@ -200,4 +200,42 @@ print(validation_df.head(10))
 
 # Save to CSV so you don't have to run it again
 validation_df.to_csv("features_validation.csv", index=False)
+print("done")
+
+
+
+#testing data
+
+
+
+testing_results = []
+
+for i in range(len(X_test)):
+    img_path = X_test[i]
+    label = y_test[i]
+
+    file_id = os.path.splitext(os.path.basename(img_path))[0]
+    mask_path = os.path.join(mask_dir, f"{file_id}_mask.png")
+
+    if not os.path.exists(mask_path):
+        continue
+
+    mask_img = imread(mask_path, as_gray=True)
+
+    testing_results.append({
+        "img_id": file_id,
+        "asymmetry_score": asymmetry(mask_img),
+        "border_irregularity": border_irregularity(mask_img),
+        "colour_complexity": color_complexity_B(img_path),
+        "is_cancer": label
+    })
+
+
+testing_df = pd.DataFrame(testing_results)
+print("\n--- testing Set Asymmetry Complete ---")
+#to see it worked
+print(testing_df.head(10))
+
+# Save to CSV so you don't have to run it again
+testing_df.to_csv("features_testing.csv", index=False)
 print("done")
